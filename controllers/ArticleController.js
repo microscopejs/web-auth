@@ -1,8 +1,13 @@
 // Import
 import {Controller} from 'microscope-web';
 import Article from '../models/Article';
+import {authorize} from '../filters/authorize';
 
 class ArticleController extends Controller {
+	
+	get filters(){
+		return [authorize];
+	}
 
 	get baseUrl() {
 		return '/api/articles';

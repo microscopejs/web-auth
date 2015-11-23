@@ -5,13 +5,17 @@ var SALT_WORK_FACTOR = 10;
 
 var User = mongoose.Schema({
     username: { type: String, required: true, index: { unique: true } },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    email: { type: String, required: true },
+    provider: String
 });
 
 User.pre('save', function(next) {
     var user = this;
 
-    if (!user.isModified('password')) return next();
+    if (!user.isModified('password')) {
+        return next();
+    }
 
     bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
         if (err) return next(err);

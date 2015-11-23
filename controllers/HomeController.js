@@ -10,7 +10,7 @@ class HomeController extends Controller {
 	
 	get routes(){
 		return {
-			'get /': [logUrl, 'index'],
+			'get /': 'index',
 			'get /home/about': 'about'
 		}
 	}

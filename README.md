@@ -53,5 +53,5 @@ Commands
 ROADMAP
 =======
 
-* bcrypt
-* 
+* user settings page
+* improve register logic
