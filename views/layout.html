@@ -37,7 +37,7 @@
 				
 				<ul class="nav navbar-nav navbar-right">
 					{% if user %}
-						<li><a href="/auth/settings/"><span class="glyphicon glyphicon-user"></span> {{user.username}}</a></li>
+						<li><a href="/auth/settings"><span class="glyphicon glyphicon-user"></span> {{user.username}}</a></li>
 						<li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> logout</a></li>
 					{% else %}
 						<li><a href="/auth/login"><span class="glyphicon glyphicon-log-in"></span> login</a></li>

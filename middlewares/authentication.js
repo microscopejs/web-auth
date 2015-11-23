@@ -23,7 +23,7 @@ passport.use(new Strategy(
 			});
 		});
 	}
-	));
+));
 
 // serialize user
 passport.serializeUser(function (user, done) {

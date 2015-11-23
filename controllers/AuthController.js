@@ -20,7 +20,9 @@ class AuthController extends Controller {
 			'get /login': 'login',
 			'get /logout': 'logout',
 			'get /register': 'register',
-			'post /signin': [authenticate, 'signin'],
+			'get /settings': 'settings',
+			'post /update': 'update',
+			'post /signin': [authenticate],
 			'post /signup': 'signup'
 		}
 	}
@@ -33,9 +35,9 @@ class AuthController extends Controller {
 	
 	// login action
 	// GET /auth/login
-	logout(request, response){
+	logout(request, response) {
 		request.logout();
-    	response.redirect('/');
+		response.redirect('/');
 	}
 
 	// register action
@@ -44,26 +46,47 @@ class AuthController extends Controller {
 		response.render('auth/register');
 	}
 
+	settings(request, response) {
+		response.render('auth/settings');
+	}
+
+	update(request, response) {
+		User.findOne({ username: request.user.username }, (err, user) => {
+			if (err) {
+				response.send(err);
+			} else {
+				user.password = request.body.password;
+				user.email = request.body.email;
+				user.save((err) => {
+					if (err) {
+						response.send(err);
+					}
+					response.redirect('/');
+				});
+			}
+		});
+	}
+
 	// signin action
 	// GET /auth/signin
-	signin(request, response){
+	signin(request, response) {
 		response.send('authentication controller');
 	}
 	
 	// signup action
 	// GET /auth/signup
-	signup(request, response){
+	signup(request, response) {
 		let user = new User({
 			username: request.body.username,
 			email: request.body.email,
 			password: request.body.password,
 			provider: 'local'
 		});
-		
+
 		user.save((err) => {
 			if (err) {
 				response.send(err.errmsg);
-			}else{
+			} else {
 				response.redirect('/auth/login');
 			}
 		});
