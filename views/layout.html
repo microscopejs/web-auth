@@ -34,6 +34,16 @@
 					<li><a href="/home/about"><i class="fa fa-info-circle"></i> About</a></li>
 					<li><a href="/api/articles"><i class="fa fa-book"></i> Article REST API</a></li>
 				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					{% if user %}
+						<li><a href="/auth/settings/"><span class="glyphicon glyphicon-user"></span> {{user.username}}</a></li>
+						<li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> logout</a></li>
+					{% else %}
+						<li><a href="/auth/login"><span class="glyphicon glyphicon-log-in"></span> login</a></li>
+						<li><a href="/auth/register"> <span class="glyphicon glyphicon-saved"></span> register</a></li>
+					{% endif %}
+				</ul>
 
 			</div>
 		</div>

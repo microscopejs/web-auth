@@ -5,6 +5,7 @@ import {authorize} from '../filters/authorize';
 
 class ArticleController extends Controller {
 	
+	// allow only authenticated user
 	get filters(){
 		return [authorize];
 	}
