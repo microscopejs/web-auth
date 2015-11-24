@@ -2,6 +2,7 @@
 import {Controller} from 'microscope-web';
 import passport from 'passport';
 import User from '../models/User';
+import {authorize} from '../filters/authorize';
 
 var authenticate = passport.authenticate('local', {
 	successRedirect: '/',
@@ -20,8 +21,8 @@ class AuthController extends Controller {
 			'get /login': 'login',
 			'get /logout': 'logout',
 			'get /register': 'register',
-			'get /settings': 'settings',
-			'post /update': 'update',
+			'get /settings': [authorize, 'settings'],
+			'post /update': [authorize, 'update'],
 			'post /signin': [authenticate],
 			'post /signup': 'signup'
 		}
@@ -49,19 +50,23 @@ class AuthController extends Controller {
 	settings(request, response) {
 		response.render('auth/settings');
 	}
-
+	
 	update(request, response) {
 		User.findOne({ username: request.user.username }, (err, user) => {
 			if (err) {
-				response.send(err);
+				request.flash('info', err.errors);
+				response.redirect('/');
 			} else {
 				user.password = request.body.password;
 				user.email = request.body.email;
 				user.save((err) => {
 					if (err) {
-						response.send(err);
+						request.flash('info', err.message);
+						response.redirect('/auth/settings');
+					}else{
+						request.flash('info', 'User settings was updated');
+						response.redirect('/');
 					}
-					response.redirect('/');
 				});
 			}
 		});
@@ -85,8 +90,10 @@ class AuthController extends Controller {
 
 		user.save((err) => {
 			if (err) {
-				response.send(err.errmsg);
-			} else {
+				request.flash('info', err.message);
+				response.redirect('/auth/register');
+			}else{
+				request.flash('info', 'You successfully signup');
 				response.redirect('/auth/login');
 			}
 		});

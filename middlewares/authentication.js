@@ -1,6 +1,7 @@
 import passport from 'passport';
 import {Strategy} from 'passport-local';
 import session from 'express-session';
+import flash from 'connect-flash';
 import User from '../models/User';
 
 // Use local strategy
@@ -40,10 +41,12 @@ passport.deserializeUser(function (id, done) {
 // register middlewares 
 export function authentication(app) {
 	app.use(session({ secret: 'microscopejs', resave: false, saveUninitialized: false }));
+	app.use(flash());
 	app.use(passport.initialize());
 	app.use(passport.session());
 	app.use(function (req, res, next) {
 		res.locals.user = req.user;
+		res.locals.flash = req.flash('info');
 		next();
 	});
 }

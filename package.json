@@ -1,7 +1,7 @@
 {
   "name": "web-mongo",
   "version": "1.0.0",
-  "description": "microscope-web mongoDB starter-kit",
+  "description": "microscope-web authentication starter-kit",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
@@ -22,6 +22,7 @@
     "babel": "^5.8.12",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.0",
     "express-session": "^1.12.1",
     "microscope-web": "^0.4.1",
