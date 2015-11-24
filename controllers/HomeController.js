@@ -1,12 +1,7 @@
 // Import
 import {Controller} from 'microscope-web';
-import {logIp, logUrl} from '../filters/commonFilters';
 
 class HomeController extends Controller {
-
-	get filters(){
-		return [logIp];
-	}
 	
 	get routes(){
 		return {

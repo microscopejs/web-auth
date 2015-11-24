@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Article from './Article';
 import User from './User';
 
 mongoose.connect('mongodb://mcsp:microscope@ds048878.mongolab.com:48878/microscope');
