@@ -50,8 +50,7 @@ Commands
 
 	npm run dev
 	
-ROADMAP
-=======
+Roadmap
+-------
 
-* user settings page
-* improve register logic
+* remove article controller
