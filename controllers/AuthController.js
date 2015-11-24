@@ -71,12 +71,6 @@ class AuthController extends Controller {
 			}
 		});
 	}
-
-	// signin action
-	// GET /auth/signin
-	signin(request, response) {
-		response.send('authentication controller');
-	}
 	
 	// signup action
 	// GET /auth/signup
